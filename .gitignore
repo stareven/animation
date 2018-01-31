@@ -1,0 +1,5 @@
+*.o
+sample
+*.py
+*.pyc
+.sconsign.dblite

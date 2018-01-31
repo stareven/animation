@@ -1,0 +1,9 @@
+# vim: set ft=python :
+
+Program('sample', ['sample.cpp', 'ProgramLoader.cpp'],
+        CXXFLAGS='-std=c++11 -g -Wall',
+        CPPPATH=['/usr/local/include', '..'],
+        LIBPATH=['/usr/local/lib'],
+        LIBS=['glfw', 'glew'],
+        FRAMEWORKS=['OpenGL'],
+)
