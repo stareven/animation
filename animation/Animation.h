@@ -125,6 +125,29 @@ public: // from Animation
         return now - _start_time;
     }
 
+public:
+    const T value() const { return value(Utils::now()); }
+
+    const T value(TTime now) const
+    {
+        assert(_start_time < TTimeMax);
+        T ret = _start_state;
+        if (!started(now))
+        {
+            ret = _start_state;
+            return true;
+        }
+        if (complete(now))
+        {
+            ret = _complete_state;
+            return false;
+        }
+        double ratio = static_cast<double>(elapsed(now)) / duration();
+        ratio = _interpolator->value(ratio);
+        ret = (1.0 - ratio) * _start_state + ratio * _complete_state;
+        return ret;
+    }
+
 private:
     T &_target;
     const T _start_state;
